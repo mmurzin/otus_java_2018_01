@@ -1,1 +1,6 @@
-# otus_java_2018_01
+Группа 2018-01
+
+### Преподаватели
+Mikhail Murzin(Мурзин Михаил)
+
+goodlost@yandex.ru
