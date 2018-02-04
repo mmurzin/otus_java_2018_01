@@ -12,18 +12,19 @@
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.9</maven.compiler.target>
-        <com.google.guava.version>23.0</com.google.guava.version>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <maven-jar-plugin.version>3.0.0</maven-jar-plugin.version>
         <maven-assembly-plugin.version>3.0.0</maven-assembly-plugin.version>
-        <main.class>ru.otus.l011.App</main.class>
+        <com.github.wvengen.proguard-maven-plugin.version>2.0.13</com.github.wvengen.proguard-maven-plugin.version>
+        <org.apache.commons.commons-collections4.version>4.1</org.apache.commons.commons-collections4.version>
+        <mainClass>ru.otus.l011.App</mainClass>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>${com.google.guava.version}</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>${org.apache.commons.commons-collections4.version}</version>
         </dependency>
     </dependencies>
 
@@ -40,7 +41,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>${main.class}</mainClass>
+                            <mainClass>${mainClass}</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -66,9 +67,32 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>${main.class}</mainClass>
+                            <mainClass>${mainClass}</mainClass>
                         </manifest>
                     </archive>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>com.github.wvengen</groupId>
+                <artifactId>proguard-maven-plugin</artifactId>
+                <version>${com.github.wvengen.proguard-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals><goal>proguard</goal></goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <obfuscate>true</obfuscate>
+                    <outjar>${project.name}_obfuscation.jar</outjar>
+                    <options>
+                        <option>-keep public class ${mainClass} {public static void main(java.lang.String[]);}</option>
+                        <option>-dontwarn</option>
+                    </options>
+                    <libs>
+                        <lib>${java.home}/lib/rt.jar</lib>
+                    </libs>
                 </configuration>
             </plugin>
 
