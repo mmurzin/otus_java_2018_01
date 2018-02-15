@@ -4,64 +4,71 @@ package ru.otus.l021;
 public class MemoryStand {
 
     private Runtime runtime;
+    private static final int SIZE = 20_000_000;
 
     MemoryStand() {
         runtime = Runtime.getRuntime();
     }
 
     public void calculateObject(Class clazz) {
-        long memoryPrev = runtime.totalMemory() - runtime.freeMemory();
-        try {
-            System.gc();
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        if (clazz.getSimpleName().equals(String.class.getSimpleName())) {
+            System.out.println("Use calculateString method");
+            return;
         }
+        Object[] array = new Object[SIZE];
+        long memoryPrev = getMemory();
         try {
-            int size = 20_000_000;
-            Object[] array = new Object[size];
-            for (int i = 0; i < size; i++) {
+            for (int i = 0; i < SIZE; i++) {
                 array[i] = clazz.newInstance();
+
             }
-            long allocatedMemory = (runtime.totalMemory() - runtime.freeMemory()) - memoryPrev;
-            System.out.println(clazz.getSimpleName() + " " + (allocatedMemory / size) + " bytes");
+            long allocatedMemory = getMemory() - memoryPrev;
+            System.out.println(clazz.getSimpleName() + " " + (allocatedMemory / SIZE) + " bytes");
         } catch (IllegalAccessException | InstantiationException e) {
             e.printStackTrace();
         }
+    }
 
-        try {
-            System.gc();
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+    public void calculateString(boolean isUsePool) {
+        Object[] array = new Object[SIZE];
+        long memoryPrev = getMemory();
+        for (int i = 0; i < SIZE; i++) {
+            if (isUsePool) {
+                array[i] = "";
+            } else {
+                array[i] = new String(new char[0]);
+            }
+
+
         }
+        long allocatedMemory = getMemory() - memoryPrev;
+        System.out.println("String pool used: " + isUsePool);
+        System.out.println("String " + (allocatedMemory / SIZE) + " bytes");
     }
 
     public void calculateObjectCollection(int size) {
-        long prevMemory = runtime.totalMemory() - runtime.freeMemory();
+        long prevMemory = getMemory();
         Object[] arr = new Object[size];
-        long currentMemory = runtime.totalMemory() - runtime.freeMemory();
-        System.out.println("Object[" + size + "] - "
+        long currentMemory = getMemory();
+        System.out.println("Object[" + size + "] : "
                 + (currentMemory - prevMemory) + " bytes");
-        System.gc();
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
     public void calculateStringCollection(int size) {
-        long prevMemory = runtime.totalMemory() - runtime.freeMemory();
+        long prevMemory = getMemory();
         String[] arr = new String[size];
-        long currentMemory = runtime.totalMemory() - runtime.freeMemory();
-        System.out.println("String[" + size + "] - "
+        long currentMemory = getMemory();
+        System.out.println("String[" + size + "] : "
                 + (currentMemory - prevMemory) + " bytes");
+    }
+
+    private long getMemory() {
         System.gc();
         try {
-            Thread.sleep(100);
+            Thread.sleep(10);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        return runtime.totalMemory() - runtime.freeMemory();
     }
 }
