@@ -1,0 +1,26 @@
+http://joxi.ru/a2XDnOQHyRkR12
+
+GC -XX:+UseSerialGC MEMORY -Xms128m -Xmx128m
+_________________________
+Copy
+MarkSweepCompact
+13:22:54 end of minor GC: - 1, Copy (from Allocation Failure) 49 milliseconds
+13:23:45 end of minor GC: - 2, Copy (from Allocation Failure) 80 milliseconds
+13:24:45 end of minor GC: - 3, Copy (from Allocation Failure) 65 milliseconds
+13:25:46 end of minor GC: - 4, Copy (from Allocation Failure) 77 milliseconds
+13:26:32 end of minor GC: - 5, Copy (from Allocation Failure) 0 milliseconds
+13:26:33 end of major GC: - 1, MarkSweepCompact (from Allocation Failure) 206 mi
+lliseconds
+Exception in thread "main" java.lang.OutOfMemoryError: Java heap space
+        at java.base/java.util.Arrays.copyOf(Unknown Source)
+13:27:36 end of major GC: - 2, MarkSweepCompact (from Allocation Failure) 192 mi
+lliseconds      at java.base/java.util.ArrayList.grow(Unknown Source)
+
+        at java.base/java.util.ArrayList.grow(Unknown Source)
+        at java.base/java.util.ArrayList.add(Unknown Source)
+        at java.base/java.util.ArrayList.add(Unknown Source)
+        at ru.otus.l041.Benchmark.run(Benchmark.java:16)
+        at ru.otus.l041.App.main(App.java:21)
+13:27:36 end of major GC: - 3, MarkSweepCompact (from Allocation Failure) 239 mi
+lliseconds
+Для продолжения нажмите любую клавишу . . .

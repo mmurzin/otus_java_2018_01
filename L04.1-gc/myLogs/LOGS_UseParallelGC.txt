@@ -1,0 +1,30 @@
+http://joxi.ru/YmEY3NDCZN7QRm
+
+GC -XX:+UseParallelGC MEMORY -Xms128m -Xmx128m
+_________________________
+PS MarkSweep
+PS Scavenge
+13:16:35 end of minor GC: - 1, PS Scavenge (from Allocation Failure) 22 millisec
+onds
+13:17:23 end of minor GC: - 2, PS Scavenge (from Allocation Failure) 26 millisec
+onds
+13:18:26 end of minor GC: - 3, PS Scavenge (from Allocation Failure) 33 millisec
+onds
+13:19:23 end of minor GC: - 4, PS Scavenge (from Allocation Failure) 75 millisec
+onds
+13:19:23 end of major GC: - 1, PS MarkSweep (from Ergonomics) 218 milliseconds
+13:20:07 end of major GC: - 2, PS MarkSweep (from Ergonomics) 274 milliseconds
+13:21:20 end of major GC: - 3, PS MarkSweep (from Ergonomics) 369 milliseconds
+Exception in thread "main" 13:21:24 end of major GC: - 4, PS MarkSweep (from Erg
+onomics) 357 millisecondsjava.lang.OutOfMemoryError: Java heap space
+
+        at java.base/java.util.Arrays.copyOf(Unknown Source)
+        at java.base/java.util.ArrayList.grow(Unknown Source)
+13:21:24 end of major GC: - 5, PS MarkSweep (from Allocation Failure) 333 millis
+econds  at java.base/java.util.ArrayList.grow(Unknown Source)
+
+        at java.base/java.util.ArrayList.add(Unknown Source)
+        at java.base/java.util.ArrayList.add(Unknown Source)
+        at ru.otus.l041.Benchmark.run(Benchmark.java:16)
+        at ru.otus.l041.App.main(App.java:21)
+Для продолжения нажмите любую клавишу . . .

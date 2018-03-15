@@ -1,0 +1,38 @@
+http://joxi.ru/l2ZMxe6H8pyPxm
+
+GC -XX:+UseG1GC MEMORY -Xms128m -Xmx128m
+_________________________
+G1 Young Generation
+G1 Old Generation
+13:09:11 end of minor GC: - 1, G1 Young Generation (from G1 Evacuation Pause) 21 milliseconds
+13:09:17 end of minor GC: - 2, G1 Young Generation (from G1 Evacuation Pause) 32 milliseconds
+13:09:21 end of minor GC: - 3, G1 Young Generation (from G1 Evacuation Pause) 4 milliseconds
+13:10:00 end of minor GC: - 4, G1 Young Generation (from G1 Evacuation Pause) 22 milliseconds
+13:10:49 end of minor GC: - 5, G1 Young Generation (from G1 Evacuation Pause) 49 milliseconds
+13:11:15 end of minor GC: - 6, G1 Young Generation (from G1 Humongous Allocation) 34 milliseconds
+13:11:53 end of minor GC: - 7, G1 Young Generation (from G1 Evacuation Pause) 38 milliseconds
+13:12:22 end of minor GC: - 8, G1 Young Generation (from G1 Humongous Allocation) 13 milliseconds
+13:12:43 end of minor GC: - 9, G1 Young Generation (from G1 Evacuation Pause) 31 milliseconds
+13:12:53 end of minor GC: - 10, G1 Young Generation (from G1 Evacuation Pause) 17 milliseconds
+13:13:06 end of minor GC: - 11, G1 Young Generation (from G1 Evacuation Pause) 23 milliseconds
+13:13:18 end of minor GC: - 12, G1 Young Generation (from G1 Evacuation Pause) 21 milliseconds
+13:13:31 end of minor GC: - 13, G1 Young Generation (from G1 Evacuation Pause) 20 milliseconds
+13:13:44 end of minor GC: - 14, G1 Young Generation (from G1 Evacuation Pause) 17 milliseconds
+13:13:56 end of minor GC: - 15, G1 Young Generation (from G1 Evacuation Pause) 25 milliseconds
+Exception in thread "main" java.lang.OutOfMemoryError: Java heap space
+13:14:04 end of minor GC: - 16, G1 Young Generation (from G1 Humongous Allocatio
+n) 5 milliseconds
+        at java.base/java.util.Arrays.copyOf(Unknown Source)
+        at java.base/java.util.ArrayList.grow(Unknown Source)
+        at java.base/java.util.ArrayList.grow(Unknown Source)
+13:14:04 end of minor GC: - 17, G1 Young Generation (from G1 Humongous Allocatio
+n) 3 milliseconds       at java.base/java.util.ArrayList.add(Unknown Source)
+
+        at java.base/java.util.ArrayList.add(Unknown Source)
+        at ru.otus.l041.Benchmark.run(Benchmark.java:16)13:14:04 end of major GC
+: - 1, G1 Old Generation (from Allocation Failure) 351 milliseconds
+
+        at ru.otus.l041.App.main(App.java:21)
+13:14:04 end of major GC: - 2, G1 Old Generation (from Allocation Failure) 266 m
+illiseconds
+Для продолжения нажмите любую клавишу . . .

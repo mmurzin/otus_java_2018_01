@@ -1,0 +1,147 @@
+http://joxi.ru/KAxXJj9c4JGo9A
+
+GC -XX:+UseConcMarkSweepGC MEMORY -Xms128m -Xmx128m
+_________________________
+Java HotSpot(TM) 64-Bit Server VM warning: Option UseConcMarkSweepGC was depreca
+ted in version 9.0 and will likely be removed in a future release.
+ParNew
+ConcurrentMarkSweep
+12:39:15 end of minor GC: - 1, ParNew (from Allocation Failure) 59 milliseconds
+12:40:10 end of minor GC: - 2, ParNew (from Allocation Failure) 67 milliseconds
+12:41:02 end of minor GC: - 3, ParNew (from Allocation Failure) 65 milliseconds
+12:41:07 end of major GC: - 1, ConcurrentMarkSweep (from No GC) 5197 millisecond
+s
+12:41:15 end of major GC: - 2, ConcurrentMarkSweep (from No GC) 5200 millisecond
+s
+12:41:22 end of major GC: - 3, ConcurrentMarkSweep (from No GC) 5193 millisecond
+s
+12:41:29 end of major GC: - 4, ConcurrentMarkSweep (from No GC) 5249 millisecond
+s
+12:41:36 end of major GC: - 5, ConcurrentMarkSweep (from No GC) 5243 millisecond
+s
+12:41:43 end of major GC: - 6, ConcurrentMarkSweep (from No GC) 5240 millisecond
+s
+12:41:51 end of major GC: - 7, ConcurrentMarkSweep (from No GC) 5210 millisecond
+s
+12:41:58 end of major GC: - 8, ConcurrentMarkSweep (from No GC) 5253 millisecond
+s
+12:42:05 end of major GC: - 9, ConcurrentMarkSweep (from No GC) 5117 millisecond
+s
+12:42:07 end of minor GC: - 4, ParNew (from Allocation Failure) 55 milliseconds
+12:42:12 end of major GC: - 10, ConcurrentMarkSweep (from No GC) 5192 millisecon
+ds
+12:42:19 end of major GC: - 11, ConcurrentMarkSweep (from No GC) 4605 millisecon
+ds
+12:42:21 end of major GC: - 12, ConcurrentMarkSweep (from No GC) 162 millisecond
+s
+12:42:23 end of major GC: - 13, ConcurrentMarkSweep (from No GC) 164 millisecond
+s
+12:42:25 end of major GC: - 14, ConcurrentMarkSweep (from No GC) 160 millisecond
+s
+12:42:27 end of major GC: - 15, ConcurrentMarkSweep (from No GC) 161 millisecond
+s
+12:42:30 end of major GC: - 16, ConcurrentMarkSweep (from No GC) 161 millisecond
+s
+12:42:32 end of major GC: - 17, ConcurrentMarkSweep (from No GC) 192 millisecond
+s
+12:42:34 end of major GC: - 18, ConcurrentMarkSweep (from No GC) 200 millisecond
+s
+12:42:36 end of major GC: - 19, ConcurrentMarkSweep (from No GC) 196 millisecond
+s
+12:42:38 end of major GC: - 20, ConcurrentMarkSweep (from No GC) 161 millisecond
+s
+12:42:41 end of major GC: - 21, ConcurrentMarkSweep (from No GC) 161 millisecond
+s
+12:42:43 end of major GC: - 22, ConcurrentMarkSweep (from No GC) 164 millisecond
+s
+12:42:45 end of major GC: - 23, ConcurrentMarkSweep (from No GC) 164 millisecond
+s
+12:42:47 end of major GC: - 24, ConcurrentMarkSweep (from No GC) 161 millisecond
+s
+12:42:49 end of major GC: - 25, ConcurrentMarkSweep (from No GC) 160 millisecond
+s
+12:42:51 end of major GC: - 26, ConcurrentMarkSweep (from No GC) 161 millisecond
+s
+12:42:54 end of major GC: - 27, ConcurrentMarkSweep (from No GC) 194 millisecond
+s
+12:42:55 end of minor GC: - 5, ParNew (from Allocation Failure) 0 milliseconds
+12:42:55 end of major GC: - 28, ConcurrentMarkSweep (from Allocation Failure) 26
+9 milliseconds
+12:42:56 end of major GC: - 29, ConcurrentMarkSweep (from No GC) 219 millisecond
+s
+12:42:58 end of major GC: - 30, ConcurrentMarkSweep (from No GC) 160 millisecond
+s
+12:43:00 end of major GC: - 31, ConcurrentMarkSweep (from No GC) 162 millisecond
+s
+12:43:02 end of major GC: - 32, ConcurrentMarkSweep (from No GC) 155 millisecond
+s
+12:43:04 end of major GC: - 33, ConcurrentMarkSweep (from No GC) 150 millisecond
+s
+12:43:06 end of major GC: - 34, ConcurrentMarkSweep (from No GC) 160 millisecond
+s
+12:43:09 end of major GC: - 35, ConcurrentMarkSweep (from No GC) 168 millisecond
+s
+12:43:11 end of major GC: - 36, ConcurrentMarkSweep (from No GC) 134 millisecond
+s
+12:43:13 end of major GC: - 37, ConcurrentMarkSweep (from No GC) 126 millisecond
+s
+12:43:15 end of major GC: - 38, ConcurrentMarkSweep (from No GC) 159 millisecond
+s
+12:43:17 end of major GC: - 39, ConcurrentMarkSweep (from No GC) 165 millisecond
+s
+12:43:19 end of major GC: - 40, ConcurrentMarkSweep (from No GC) 127 millisecond
+s
+12:43:21 end of major GC: - 41, ConcurrentMarkSweep (from No GC) 153 millisecond
+s
+12:43:24 end of major GC: - 42, ConcurrentMarkSweep (from No GC) 176 millisecond
+s
+12:43:26 end of major GC: - 43, ConcurrentMarkSweep (from No GC) 160 millisecond
+s
+12:43:28 end of major GC: - 44, ConcurrentMarkSweep (from No GC) 158 millisecond
+s
+12:43:30 end of major GC: - 45, ConcurrentMarkSweep (from No GC) 159 millisecond
+s
+12:43:32 end of major GC: - 46, ConcurrentMarkSweep (from No GC) 164 millisecond
+s
+12:43:34 end of major GC: - 47, ConcurrentMarkSweep (from No GC) 151 millisecond
+s
+12:43:37 end of major GC: - 48, ConcurrentMarkSweep (from No GC) 134 millisecond
+s
+12:43:39 end of major GC: - 49, ConcurrentMarkSweep (from No GC) 162 millisecond
+s
+12:43:41 end of major GC: - 50, ConcurrentMarkSweep (from No GC) 150 millisecond
+s
+12:43:43 end of major GC: - 51, ConcurrentMarkSweep (from No GC) 160 millisecond
+s
+12:43:45 end of major GC: - 52, ConcurrentMarkSweep (from No GC) 171 millisecond
+s
+12:43:47 end of major GC: - 53, ConcurrentMarkSweep (from No GC) 139 millisecond
+s
+12:43:50 end of major GC: - 54, ConcurrentMarkSweep (from No GC) 149 millisecond
+s
+12:43:52 end of major GC: - 55, ConcurrentMarkSweep (from No GC) 141 millisecond
+s
+12:43:54 end of major GC: - 56, ConcurrentMarkSweep (from No GC) 157 millisecond
+s
+12:43:56 end of major GC: - 57, ConcurrentMarkSweep (from No GC) 157 millisecond
+s
+12:43:58 end of major GC: - 58, ConcurrentMarkSweep (from No GC) 153 millisecond
+s
+12:44:00 end of major GC: - 59, ConcurrentMarkSweep (from No GC) 163 millisecond
+s
+12:44:02 end of major GC: - 60, ConcurrentMarkSweep (from No GC) 129 millisecond
+s
+Exception in thread "main" java.lang.OutOfMemoryError: Java heap space
+12:44:04 end of minor GC: - 6, ParNew (from Allocation Failure) 0 milliseconds
+12:44:04 end of major GC: - 61, ConcurrentMarkSweep (from Allocation Failure) 32
+7 milliseconds
+12:44:04 end of major GC: - 62, ConcurrentMarkSweep (from Allocation Failure) 28
+8 milliseconds
+        at java.base/java.util.Arrays.copyOf(Unknown Source)
+        at java.base/java.util.ArrayList.grow(Unknown Source)
+        at java.base/java.util.ArrayList.grow(Unknown Source)
+        at java.base/java.util.ArrayList.add(Unknown Source)
+        at java.base/java.util.ArrayList.add(Unknown Source)
+        at ru.otus.l041.Benchmark.run(Benchmark.java:16)
+        at ru.otus.l041.App.main(App.java:21)
+Для продолжения нажмите любую клавишу . . .
