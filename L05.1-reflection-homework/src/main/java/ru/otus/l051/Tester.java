@@ -4,12 +4,12 @@ import ru.otus.l051.annotations.After;
 import ru.otus.l051.annotations.Before;
 import ru.otus.l051.annotations.Test;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Objects;
 
-public class Tester {
+class Tester {
 
     private static ArrayList<Method> beforeMethods;
     private static ArrayList<Method> testMethods;
@@ -19,7 +19,7 @@ public class Tester {
         throw new UnsupportedOperationException();
     }
 
-    public static void testClass(String className) {
+    static void testClass(String className) {
         resetData();
         Class<?> clazz = getClassFromName(className);
 
@@ -34,6 +34,14 @@ public class Tester {
                 afterMethods.add(method);
             }
         }
+
+        if (beforeMethods.size() +
+                testMethods.size() +
+                afterMethods.size() == 0) {
+            System.out.println("No annotations found in class: " + className);
+            return;
+        }
+
         try {
             for (Method testMethod : testMethods) {
                 Object o = ReflectionHelper.instantiate(clazz);
@@ -44,11 +52,20 @@ public class Tester {
                 for (Method afterMethod : afterMethods) {
                     afterMethod.invoke(o);
                 }
+                System.out.println("---------------------------------");
             }
         } catch (IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
 
+    }
+
+    static void testPackage(String packageName) throws IOException {
+        String[] names =
+                ReflectionHelper.getNamesByPackage(packageName);
+        for (String className : names) {
+            Tester.testClass(className);
+        }
     }
 
 
