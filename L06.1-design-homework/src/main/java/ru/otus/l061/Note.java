@@ -1,10 +1,11 @@
 package ru.otus.l061;
 
 
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class Bill {
+public class Note {
     public static int NOMINAL_100 = 100;
     public static int NOMINAL_200 = 200;
     public static int NOMINAL_500 = 500;
@@ -24,7 +25,18 @@ public class Bill {
         AVAILABLE_NOMINALS.add(NOMINAL_5000);
     }
 
-    Bill(int nominal) {
+    public static long getBalance(List<Note> items) {
+        long balance = 0;
+        if (items == null || items.isEmpty()) {
+            return balance;
+        }
+        for (Note item : items) {
+            balance += item.getNominal();
+        }
+        return balance;
+    }
+
+    Note(int nominal) {
         if (isValidNominal(nominal)) {
             this.nominal = nominal;
         } else {
@@ -48,4 +60,5 @@ public class Bill {
     public int getNominal() {
         return nominal;
     }
+
 }
