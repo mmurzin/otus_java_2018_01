@@ -15,9 +15,20 @@
         <maven.compiler.target>1.9</maven.compiler.target>
         <maven-jar-plugin.version>3.0.0</maven-jar-plugin.version>
         <maven-assembly-plugin.version>3.0.0</maven-assembly-plugin.version>
+        <junit-version>4.11</junit-version>
 
         <main.class>ru.otus.l061.App</main.class>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit-version}</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
 
     <build>
         <finalName>${project.name}</finalName>

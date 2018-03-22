@@ -25,6 +25,10 @@ public class Note {
         AVAILABLE_NOMINALS.add(NOMINAL_5000);
     }
 
+    public static Integer[] getAvialableNominals() {
+        return AVAILABLE_NOMINALS.toArray(new Integer[AVAILABLE_NOMINALS.size()]);
+    }
+
     public static long getBalance(List<Note> items) {
         long balance = 0;
         if (items == null || items.isEmpty()) {
