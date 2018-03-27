@@ -49,7 +49,7 @@ public class CashMachineTest {
         }
         List<Note> userNotes = cashMachine.getMoney(needBalance);
         Assert.assertEquals(userNotes.isEmpty(), false);
-        
+
         long notValidBalance = 1050;
         userNotes = cashMachine.getMoney(notValidBalance);
         Assert.assertEquals(userNotes.isEmpty(), true);
