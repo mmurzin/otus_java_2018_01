@@ -7,10 +7,7 @@ import java.util.*;
 
 public class CashMachine implements ICashMachine {
 
-    private long balance = 0;
-
     private Map<Integer, List<Note>> notesMap = new TreeMap<>();
-
 
     public CashMachine(IDepartment department) {
         department.register(this);
@@ -19,7 +16,6 @@ public class CashMachine implements ICashMachine {
     @Override
     public void depositMoney(List<Note> notes) {
         for (Note note : notes) {
-            balance += note.getNominal();
             insertNote(note);
         }
     }
@@ -36,11 +32,11 @@ public class CashMachine implements ICashMachine {
 
     @Override
     public List<Note> getMoney(long value) {
-        if (value > balance) {
+        if (value > getBalance()) {
             return null;
         }
 
-        Map<Integer, List<Note>> backup = new TreeMap<>(notesMap);
+        Map<Integer,List<Note>> backup = new TreeMap<>(notesMap);
 
         List<Integer> avialableNominals = getAvialableNominals();
 
@@ -92,8 +88,6 @@ public class CashMachine implements ICashMachine {
         if (delta != 0) {
             this.notesMap = backup;
             userNotes = new ArrayList<>();
-        } else {
-            balance -= value;
         }
         return userNotes;
     }
@@ -115,18 +109,24 @@ public class CashMachine implements ICashMachine {
 
     @Override
     public long getBalance() {
+        long balance = 0;
+        for (Map.Entry<Integer, List<Note>> entry : notesMap.entrySet()) {
+            balance += entry
+                    .getValue()
+                    .stream()
+                    .mapToLong(Note::getNominal).sum();
+        }
         return balance;
     }
 
     @Override
-    public void notify(Message message) {
+    public void notifyMessage(Message message) {
         switch (message.getType()) {
             case RESET:
                 restoreFromMemento(((ResetMessage) message).getMemento());
                 break;
         }
     }
-
 
     @Override
     public CashMachineMemento saveToMemento() {
@@ -135,27 +135,6 @@ public class CashMachine implements ICashMachine {
 
     @Override
     public void restoreFromMemento(CashMachineMemento memento) {
-        Map<Integer, List<Note>> mementoMap = memento.getSavedState();
-        this.notesMap = mementoMap;
-        this.balance = getMapBalance(mementoMap);
-    }
-
-    private long getMapBalance(Map<Integer, List<Note>> mementoMap) {
-        long balance = 0;
-        for (Map.Entry<Integer, List<Note>> entry :
-                mementoMap.entrySet()) {
-            balance +=
-                    entry.getValue()
-                            .stream()
-                            .mapToInt(Note::getNominal)
-                            .sum();
-        }
-        return balance;
-    }
-
-    //TODO реализовать хешкод
-    @Override
-    public int hashCode() {
-        return super.hashCode();
+        this.notesMap = memento.getSavedState();
     }
 }

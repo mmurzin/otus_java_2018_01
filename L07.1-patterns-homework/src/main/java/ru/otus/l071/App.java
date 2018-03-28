@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+
 public class App {
-    private static Integer[] nominals;
 
     public static void main(String[] args) {
-        nominals = Note.getAvialableNominals();
+
         IDepartment department = new Department();
         long balance = 0;
         for (int i = 0; i < 10; i++) {
@@ -23,12 +23,14 @@ public class App {
 
             machine.depositMoney(listPair.getValue());
         }
+
         System.out.println("In for balance " + balance);
         System.out.println("Department balance " + department.getBalances());
         System.out.println("Reset all machines");
         department.resetMachines();
         System.out.println("Department balance " + department.getBalances());
     }
+
 
     private static Pair<Long, List<Note>> getRandomNotes() {
         final int MAX_SIZE = 1000;
@@ -46,7 +48,10 @@ public class App {
     }
 
     private static Note getRandomNote() {
+        Integer[] nominals = Note.getAvialableNominals();
         return new Note(nominals[
                 new Random().nextInt(nominals.length)]);
     }
+
+
 }

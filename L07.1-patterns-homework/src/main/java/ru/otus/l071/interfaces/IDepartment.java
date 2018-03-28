@@ -8,5 +8,5 @@ public interface IDepartment {
     //observer
     void register(ICashMachine observer);
 
-    void unregister(ICashMachine observer);
+    boolean unregister(ICashMachine observer);
 }

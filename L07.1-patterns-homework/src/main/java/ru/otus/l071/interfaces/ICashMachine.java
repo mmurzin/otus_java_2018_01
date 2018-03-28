@@ -14,7 +14,7 @@ public interface ICashMachine {
     long getBalance();
 
     //observer pattern
-    void notify(Message message);
+    void notifyMessage(Message message);
 
     //memento
     CashMachineMemento saveToMemento();
