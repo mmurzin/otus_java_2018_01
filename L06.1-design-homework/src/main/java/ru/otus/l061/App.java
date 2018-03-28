@@ -15,7 +15,7 @@ public class App {
 
         List<Note> insertNotes = getNoteList();
         System.out.println("Deposit money, value: "
-                + Note.getBalance(insertNotes));
+                + NoteUtils.countMoney(insertNotes));
         atm.depositMoney(insertNotes);
         System.out.println("Balance: "
                 + String.valueOf(atm.getBalance()));
@@ -38,12 +38,12 @@ public class App {
 
     private static List<Note> getNoteList() {
         List<Note> items = new ArrayList<>(6);
-        items.add(new Note(Note.NOMINAL_100));
-        items.add(new Note(Note.NOMINAL_200));
-        items.add(new Note(Note.NOMINAL_500));
-        items.add(new Note(Note.NOMINAL_1000));
-        items.add(new Note(Note.NOMINAL_2000));
-        items.add(new Note(Note.NOMINAL_5000));
+        items.add(new Note(Note.NominalEnum.NOMINAL_100.getNominal()));
+        items.add(new Note(Note.NominalEnum.NOMINAL_200.getNominal()));
+        items.add(new Note(Note.NominalEnum.NOMINAL_500.getNominal()));
+        items.add(new Note(Note.NominalEnum.NOMINAL_1000.getNominal()));
+        items.add(new Note(Note.NominalEnum.NOMINAL_2000.getNominal()));
+        items.add(new Note(Note.NominalEnum.NOMINAL_5000.getNominal()));
         return items;
     }
 }

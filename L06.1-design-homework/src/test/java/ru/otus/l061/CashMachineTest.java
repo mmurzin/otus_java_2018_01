@@ -56,6 +56,14 @@ public class CashMachineTest {
 
     }
 
+    @Test
+    public void getBalance() {
+        Pair<Long, List<Note>> randomNotePair = getRandomNotes();
+        long pairBalance = randomNotePair.getKey();
+        cashMachine.depositMoney(randomNotePair.getValue());
+        Assert.assertEquals(pairBalance,cashMachine.getBalance());
+    }
+
     private List<Note> wrapToList(Note... notes) {
         List<Note> items = new ArrayList<>(notes.length);
         items.addAll(Arrays.asList(notes));

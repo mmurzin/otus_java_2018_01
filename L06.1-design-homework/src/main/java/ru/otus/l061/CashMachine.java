@@ -4,14 +4,11 @@ import java.util.*;
 
 public class CashMachine implements ICashMachine {
 
-    private long balance = 0;
-
     private Map<Integer, ArrayList<Note>> notesMap = new TreeMap<>();
 
     @Override
     public void depositMoney(List<Note> notes) {
         for (Note note : notes) {
-            balance += note.getNominal();
             insertNote(note);
         }
     }
@@ -28,7 +25,7 @@ public class CashMachine implements ICashMachine {
 
     @Override
     public List<Note> getMoney(long value) {
-        if (value > balance) {
+        if (value > getBalance()) {
             return null;
         }
 
@@ -84,8 +81,6 @@ public class CashMachine implements ICashMachine {
         if (delta != 0) {
             this.notesMap = backup;
             userNotes = new ArrayList<>();
-        } else {
-            balance -= value;
         }
         return userNotes;
     }
@@ -107,6 +102,13 @@ public class CashMachine implements ICashMachine {
 
     @Override
     public long getBalance() {
+        long balance = 0;
+        for (Map.Entry<Integer, ArrayList<Note>> entry : notesMap.entrySet()) {
+            balance += entry
+                    .getValue()
+                    .stream()
+                    .mapToLong(Note::getNominal).sum();
+        }
         return balance;
     }
 }

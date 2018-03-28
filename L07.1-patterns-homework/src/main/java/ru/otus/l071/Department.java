@@ -25,7 +25,8 @@ public class Department implements IDepartment {
 
     @Override
     public void resetMachines() {
-        /*По сути делает то же самое, можно обойтись без паттерна observer вообще
+        /*По сути делает то же самое, на данном этапе,
+            можно обойтись без паттерна observer вообще
         cashMachines
                 .forEach(it -> it.restoreFromMemento(cashMachineStates.get(it)));*/
 
