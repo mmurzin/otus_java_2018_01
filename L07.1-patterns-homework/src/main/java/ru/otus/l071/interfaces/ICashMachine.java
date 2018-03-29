@@ -13,6 +13,8 @@ public interface ICashMachine {
 
     long getBalance();
 
+    void saveMachineState();
+
     //observer pattern
     void notifyMessage(Message message);
 

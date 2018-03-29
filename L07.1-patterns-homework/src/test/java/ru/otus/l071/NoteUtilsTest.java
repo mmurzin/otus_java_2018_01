@@ -14,7 +14,7 @@ public class NoteUtilsTest {
     public void getBalance() {
         int SIZE = 10;
         List<Note> items = new ArrayList<>();
-        Integer[] nominals = Note.getAvialableNominals();
+        int[] nominals = Note.getAvialableNominals();
         long balance = 0;
         for (int i = 0; i < SIZE; i++) {
             int index = new Random().nextInt(nominals.length);

@@ -15,7 +15,7 @@ public class TestUtils {
     }
 
     static Note getRandomNote() {
-        Integer[] nominals = Note.getAvialableNominals();
+        int[] nominals = Note.getAvialableNominals();
         return new Note(nominals[
                 new Random().nextInt(nominals.length)]);
     }

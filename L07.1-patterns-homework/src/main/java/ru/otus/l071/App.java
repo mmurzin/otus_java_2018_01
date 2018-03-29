@@ -1,6 +1,5 @@
 package ru.otus.l071;
 
-import javafx.util.Pair;
 import ru.otus.l071.interfaces.ICashMachine;
 import ru.otus.l071.interfaces.IDepartment;
 
@@ -12,46 +11,64 @@ import java.util.Random;
 public class App {
 
     public static void main(String[] args) {
-
+        int machinesCount = 10;
         IDepartment department = new Department();
-        long balance = 0;
-        for (int i = 0; i < 10; i++) {
+        long initialBalance = 0;
+
+        List<Integer> noteItems = new ArrayList<>(machinesCount);
+        List<ICashMachine> cashMachines = new ArrayList<>(machinesCount);
+        for (int i = 0; i < machinesCount; i++) {
             ICashMachine machine = new CashMachine(department);
+            List<Note> notes = getRandomNotes();
+            machine.depositMoney(notes);
+            machine.saveMachineState();
+            initialBalance += machine.getBalance();
 
-            Pair<Long, List<Note>> listPair = getRandomNotes();
-            balance += listPair.getKey();
-
-            machine.depositMoney(listPair.getValue());
+            cashMachines.add(machine);
+            noteItems.add(notes.get(0).getNominal());
         }
 
-        System.out.println("In for balance " + balance);
+        System.out.println("Deposit in all machines " + initialBalance);
+        System.out.println("Deposit in department " + department.getBalances());
+        System.out.println("Saved balance " + initialBalance);
+        long deltaNotes = 0;
+        for (int i = 0; i < machinesCount; i++) {
+            int noteNominal = noteItems.get(i);
+            List<Note> notes = cashMachines
+                    .get(i)
+                    .getMoney(noteNominal);
+            if (!notes.isEmpty()) {
+                deltaNotes += noteNominal;
+            }
+        }
+        System.out.println("Received money from all machines " + deltaNotes);
         System.out.println("Department balance " + department.getBalances());
+
+
+
         System.out.println("Reset all machines");
         department.resetMachines();
-        System.out.println("Department balance " + department.getBalances());
+        System.out.println("Department balance after reset " + department.getBalances());
     }
 
 
-    private static Pair<Long, List<Note>> getRandomNotes() {
+    private static List<Note> getRandomNotes() {
         final int MAX_SIZE = 1000;
         final int MIN_SIZE = 10;
         Random random = new Random();
         int size = random.nextInt(MAX_SIZE) + MIN_SIZE;
         List<Note> notes = new ArrayList<>(size);
-        Long balance = 0L;
         for (int i = 0; i < size; i++) {
             Note note = getRandomNote();
-            balance += note.getNominal();
             notes.add(note);
         }
-        return new Pair<>(balance, notes);
+        return notes;
     }
 
     private static Note getRandomNote() {
-        Integer[] nominals = Note.getAvialableNominals();
+        int[] nominals = Note.getAvialableNominals();
         return new Note(nominals[
                 new Random().nextInt(nominals.length)]);
     }
-
 
 }

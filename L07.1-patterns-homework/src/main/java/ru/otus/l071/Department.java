@@ -36,7 +36,6 @@ public class Department implements IDepartment {
         if(machine == null){
             throw new NullSubjectException();
         }
-        cashMachineStates.put(machine, machine.saveToMemento());
         cashMachines.add(machine);
     }
 
@@ -48,5 +47,10 @@ public class Department implements IDepartment {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void saveState(CashMachine machine) {
+        cashMachineStates.put(machine, machine.saveToMemento());
     }
 }

@@ -8,9 +8,11 @@ import java.util.*;
 public class CashMachine implements ICashMachine {
 
     private Map<Integer, List<Note>> notesMap = new TreeMap<>();
+    private IDepartment department;
 
     public CashMachine(IDepartment department) {
         department.register(this);
+        this.department = department;
     }
 
     @Override
@@ -36,7 +38,7 @@ public class CashMachine implements ICashMachine {
             return null;
         }
 
-        Map<Integer,List<Note>> backup = new TreeMap<>(notesMap);
+        Map<Integer, List<Note>> backup = new TreeMap<>(notesMap);
 
         List<Integer> avialableNominals = getAvialableNominals();
 
@@ -119,6 +121,7 @@ public class CashMachine implements ICashMachine {
         return balance;
     }
 
+
     @Override
     public void notifyMessage(Message message) {
         switch (message.getType()) {
@@ -136,5 +139,12 @@ public class CashMachine implements ICashMachine {
     @Override
     public void restoreFromMemento(CashMachineMemento memento) {
         this.notesMap = memento.getSavedState();
+    }
+
+    @Override
+    public void saveMachineState() {
+        if (department != null) {
+            department.saveState(this);
+        }
     }
 }

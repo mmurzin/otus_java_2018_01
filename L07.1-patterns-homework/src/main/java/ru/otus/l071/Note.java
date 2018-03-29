@@ -1,9 +1,6 @@
 package ru.otus.l071;
 
 
-import java.util.Set;
-import java.util.TreeSet;
-
 public class Note {
 
     public enum NominalEnum {
@@ -25,17 +22,19 @@ public class Note {
         }
     }
 
-    private static Set<Integer> AVAILABLE_NOMINALS = new TreeSet<>();
+    private static int[] AVAILABLE_NOMINALS = new int[NominalEnum.values().length];
     private int nominal;
 
     static {
+        int i = 0;
         for (NominalEnum nominalEnum : NominalEnum.values()) {
-            AVAILABLE_NOMINALS.add(nominalEnum.getNominal());
+            AVAILABLE_NOMINALS[i] = nominalEnum.getNominal();
+            i++;
         }
     }
 
-    public static Integer[] getAvialableNominals() {
-        return AVAILABLE_NOMINALS.toArray(new Integer[AVAILABLE_NOMINALS.size()]);
+    public static int[] getAvialableNominals() {
+        return AVAILABLE_NOMINALS;
     }
 
     public Note(int nominal) {
