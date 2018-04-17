@@ -42,4 +42,25 @@ public class DataSetHelper {
     public static boolean isNewEntity(DataSet entity) {
         return entity.getId() == 0;
     }
+
+    public static Map<String, Field> getObjectFields(Object src) {
+        Map<String, Field> map = new HashMap<>();
+        Class clazz = src.getClass();
+        while (true) {
+            if (clazz.equals(Object.class)) {
+                break;
+            }
+            Field[] currentFields = clazz.getDeclaredFields();
+            for (Field field : currentFields) {
+                field.setAccessible(true);
+                boolean isStatic = Modifier.isStatic(field.getModifiers());
+                boolean isTransient = Modifier.isTransient(field.getModifiers());
+                if (!isStatic && !isTransient) {
+                    map.put(field.getName(), field);
+                }
+            }
+            clazz = clazz.getSuperclass();
+        }
+        return map;
+    }
 }
