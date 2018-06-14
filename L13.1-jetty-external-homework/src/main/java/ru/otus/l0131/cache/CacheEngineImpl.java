@@ -28,6 +28,13 @@ public class CacheEngineImpl<K, V> implements CacheEngine<K, V> {
     private int miss = 0;
     private int requestCount = 0;
 
+    public CacheEngineImpl() {
+        this.maxElements = DEFAULT_CACHE_SIZE;
+        this.lifeTimeMs = DB_CACHE_LIFE_TIME;
+        this.idleTimeMs = DB_CACHE_IDLE_TIME;
+        this.isEternal = false;
+    }
+
     public CacheEngineImpl(int maxElements,
                            long lifeTimeMs,
                            long idleTimeMs,

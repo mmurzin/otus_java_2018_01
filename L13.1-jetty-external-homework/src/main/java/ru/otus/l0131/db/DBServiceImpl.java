@@ -20,23 +20,15 @@ import static ru.otus.l0131.cache.CacheEngineImpl.*;
 
 public class DBServiceImpl implements DBService {
 
-    private final SessionFactory sessionFactory;
+    private SessionFactory sessionFactory;
 
     private CacheEngine<Long, UserDataSet> cacheEngine;
 
-    public static Class[] getDBModels() {
-        return new Class[]{
-                UserDataSet.class,
-                PhoneDataSet.class,
-                AddressDataSet.class
-        };
-    }
-
-    public DBServiceImpl() {
+    public DBServiceImpl(CacheEngine cacheEngine) {
 
         Configuration configuration = new Configuration();
 
-        setCacheEnabled(true);
+        this.cacheEngine = cacheEngine;
 
         for (Class current : getDBModels()) {
             configuration.addAnnotatedClass(current);
@@ -53,6 +45,14 @@ public class DBServiceImpl implements DBService {
         configuration.setProperty("hibernate.enable_lazy_load_no_trans", "true");
 
         sessionFactory = createSessionFactory(configuration);
+    }
+
+    public static Class[] getDBModels() {
+        return new Class[]{
+                UserDataSet.class,
+                PhoneDataSet.class,
+                AddressDataSet.class
+        };
     }
 
     private static SessionFactory createSessionFactory(Configuration configuration) {
@@ -77,14 +77,11 @@ public class DBServiceImpl implements DBService {
 
     @Override
     public void setCacheEnabled(boolean enabled) {
-        if (enabled) {
-            cacheEngine =
-                    new CacheEngineImpl<>(
-                            DEFAULT_CACHE_SIZE,
-                            DB_CACHE_LIFE_TIME,
-                            DB_CACHE_IDLE_TIME,
-                            false);
-        } else {
+        if (enabled && cacheEngine == null) {
+            cacheEngine = new CacheEngineImpl<>();
+        }
+
+        if(!enabled) {
             if (cacheEngine != null) {
                 cacheEngine.dispose();
             }
