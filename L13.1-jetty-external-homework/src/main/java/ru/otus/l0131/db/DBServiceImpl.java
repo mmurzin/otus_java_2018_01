@@ -24,11 +24,19 @@ public class DBServiceImpl implements DBService {
 
     private CacheEngine<Long, UserDataSet> cacheEngine;
 
-    public DBServiceImpl(CacheEngine cacheEngine) {
 
+    public DBServiceImpl(){
+        initService();
+    }
+    public DBServiceImpl(CacheEngine cacheEngine) {
+        this.cacheEngine = cacheEngine;
+        initService();
+    }
+
+    private void initService() {
         Configuration configuration = new Configuration();
 
-        this.cacheEngine = cacheEngine;
+
 
         for (Class current : getDBModels()) {
             configuration.addAnnotatedClass(current);
