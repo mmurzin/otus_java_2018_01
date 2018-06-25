@@ -10,6 +10,6 @@ import java.util.concurrent.ConcurrentHashMap;
 public class LoginWebSocketCreator implements WebSocketCreator {
     @Override
     public Object createWebSocket(ServletUpgradeRequest req, ServletUpgradeResponse resp) {
-        return new LoginSocket();
+        return new LoginSocket(req.getSession());
     }
 }

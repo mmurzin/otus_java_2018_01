@@ -8,7 +8,7 @@ init = function () {
     ws.onmessage = function (event) {
         var result = JSON.parse(event.data)
         if(result.loginSuccessful){
-            alert("Авторизация прошла успешно")
+            window.location.replace(window.location.origin+"/cache");
         }else{
             alert("Неверный логин пароль")
         }

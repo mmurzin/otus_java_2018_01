@@ -1,15 +1,13 @@
 package ru.otus.l0151.frontend;
 
-import ru.otus.l0151.AuthResult;
-import ru.otus.l0151.GsonUtil;
-import ru.otus.l0151.MessageContext;
-import ru.otus.l0151.UserCredentials;
+import ru.otus.l0151.*;
 import ru.otus.l0151.message.Address;
 import ru.otus.l0151.message.DoLoginMessage;
 import ru.otus.l0151.message.Message;
 import ru.otus.l0151.message.MessageSystem;
 import ru.otus.l0151.websocket.LoginSocket;
 
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -59,7 +57,6 @@ public class FrontendServiceImp implements FrontendService {
     public void publishLoginResult(UserCredentials credentials,
                                    boolean isSuccessfulLogin) {
 
-        logger.log(Level.INFO, "publishLoginResult " + credentials.toString() +" result "+isSuccessfulLogin);
 
         LoginSocket loginSocket = sockets.get(credentials);
         if(loginSocket != null){
@@ -67,6 +64,7 @@ public class FrontendServiceImp implements FrontendService {
             String result = GsonUtil.getGson().toJson(authResult);
             try {
                 loginSocket.getSession().getRemote().sendString(result);
+                AuthUtils.authorized(loginSocket.getHttpSession(), true);
             } catch (IOException e) {
                 e.printStackTrace();
                 System.out.println(e.toString());
