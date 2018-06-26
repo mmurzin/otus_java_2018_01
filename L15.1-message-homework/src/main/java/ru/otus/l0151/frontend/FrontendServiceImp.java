@@ -17,9 +17,11 @@ import java.util.logging.Logger;
 public class FrontendServiceImp implements FrontendService {
     private final MessageContext context;
     private final Address address;
-    private final Map<String, LoginSocket> sockets =
+    private final Map<UserCredentials, LoginSocket> sockets =
             new ConcurrentHashMap<>();
-  
+    private final static Logger logger = Logger.getLogger(MessageSystem.class.getName());
+
+
     public FrontendServiceImp(MessageContext context) {
         this.context = context;
         this.address = context.getFrontAddress();
@@ -42,7 +44,7 @@ public class FrontendServiceImp implements FrontendService {
 
     @Override
     public void doLogin(UserCredentials credentials, LoginSocket loginSocket) {
-        sockets.put(credentials.getLogin(), loginSocket);
+        sockets.put(credentials, loginSocket);
         Message message = new DoLoginMessage(getAddress(),
                 context.getDbAddress(), credentials);
         MessageSystem messageSystem = context.getMessageSystem();
