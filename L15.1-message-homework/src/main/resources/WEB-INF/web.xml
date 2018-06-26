@@ -26,16 +26,6 @@
         <url-pattern>/websocket</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>cacheServlet</servlet-name>
-        <servlet-class>ru.otus.l0151.servlets.CacheServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>cacheServlet</servlet-name>
-        <url-pattern>/cache</url-pattern>
-    </servlet-mapping>
-
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
