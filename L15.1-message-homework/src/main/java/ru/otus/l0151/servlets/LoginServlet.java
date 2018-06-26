@@ -1,11 +1,7 @@
 package ru.otus.l0151.servlets;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ru.otus.l0151.AuthUtils;
-import ru.otus.l0151.FrontendUtils;
 import ru.otus.l0151.TemplateProcessor;
-import ru.otus.l0151.frontend.FrontendService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,17 +21,6 @@ public class LoginServlet extends AbstractHttpServlet {
     private static final String AUTHORIZED = "Авторизован";
     private static final String UNAUTHORIZED = "Не авторизован";
     private final TemplateProcessor templateProcessor;
-
-    private FrontendService frontendService;
-
-
-    public void init() {
-        ApplicationContext context = new ClassPathXmlApplicationContext("SpringBeans.xml");
-        frontendService = (FrontendService) context.getBean("frontendService");
-        FrontendUtils.setFrontendService(frontendService);
-    }
-
-
 
     @SuppressWarnings("WeakerAccess")
     public LoginServlet() throws IOException {

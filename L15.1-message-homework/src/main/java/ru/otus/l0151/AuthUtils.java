@@ -1,6 +1,7 @@
 package ru.otus.l0151;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 public class AuthUtils {
     private static final String AUTHORIZED_KEY = "authorized";
@@ -8,8 +9,10 @@ public class AuthUtils {
     private AuthUtils() {
     }
 
-    public static void authorized(HttpServletRequest request, boolean state) {
-        request.getSession().setAttribute(AUTHORIZED_KEY, state);
+    public static void authorized(HttpSession httpSession, AuthResult state) {
+        if(httpSession != null){
+            httpSession.setAttribute(AUTHORIZED_KEY, state.isLoginSuccessful());
+        }
     }
 
     public static boolean isAuthorized(HttpServletRequest request) {

@@ -6,4 +6,8 @@ public class AuthResult {
     public AuthResult(boolean loginSuccessful) {
         this.loginSuccessful = loginSuccessful;
     }
+
+    public boolean isLoginSuccessful() {
+        return loginSuccessful;
+    }
 }

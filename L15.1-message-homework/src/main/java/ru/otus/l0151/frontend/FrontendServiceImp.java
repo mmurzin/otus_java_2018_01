@@ -1,15 +1,13 @@
 package ru.otus.l0151.frontend;
 
-import ru.otus.l0151.AuthResult;
-import ru.otus.l0151.GsonUtil;
-import ru.otus.l0151.MessageContext;
-import ru.otus.l0151.UserCredentials;
+import ru.otus.l0151.*;
 import ru.otus.l0151.message.Address;
 import ru.otus.l0151.message.DoLoginMessage;
 import ru.otus.l0151.message.Message;
 import ru.otus.l0151.message.MessageSystem;
 import ru.otus.l0151.websocket.LoginSocket;
 
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -19,7 +17,7 @@ import java.util.logging.Logger;
 public class FrontendServiceImp implements FrontendService {
     private final MessageContext context;
     private final Address address;
-    private final Map<UserCredentials, LoginSocket> sockets =
+    private final Map<String, LoginSocket> sockets =
             new ConcurrentHashMap<>();
     private final static Logger logger = Logger.getLogger(MessageSystem.class.getName());
 
@@ -46,7 +44,7 @@ public class FrontendServiceImp implements FrontendService {
 
     @Override
     public void doLogin(UserCredentials credentials, LoginSocket loginSocket) {
-        sockets.put(credentials, loginSocket);
+        sockets.put(credentials.getLogin(), loginSocket);
         Message message = new DoLoginMessage(getAddress(),
                 context.getDbAddress(), credentials);
         MessageSystem messageSystem = context.getMessageSystem();
@@ -61,10 +59,11 @@ public class FrontendServiceImp implements FrontendService {
 
         logger.log(Level.INFO, "publishLoginResult " + credentials.toString() +" result "+isSuccessfulLogin);
 
-        LoginSocket loginSocket = sockets.get(credentials);
+        LoginSocket loginSocket = sockets.get(credentials.getLogin());
         if(loginSocket != null){
             AuthResult authResult = new AuthResult(isSuccessfulLogin);
             String result = GsonUtil.getGson().toJson(authResult);
+            AuthUtils.authorized(loginSocket.getHttpSession(),authResult);
             try {
                 loginSocket.getSession().getRemote().sendString(result);
             } catch (IOException e) {
