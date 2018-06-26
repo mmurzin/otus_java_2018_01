@@ -6,11 +6,11 @@ init = function () {
 
     }
     ws.onmessage = function (event) {
-        var result = JSON.parse(event.data)
+        var result = JSON.parse(event.data);
         if(result.loginSuccessful){
-            alert("Авторизация прошла успешно")
+            window.location.replace(window.location.origin+"/cache");
         }else{
-            alert("Неверный логин пароль")
+            alert("Неверный логин пароль");
         }
     }
     ws.onclose = function (event) {

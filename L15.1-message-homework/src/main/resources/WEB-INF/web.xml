@@ -21,6 +21,16 @@
         <servlet-class>ru.otus.l0151.websocket.WebSocketLoginServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>cacheServlet</servlet-name>
+        <servlet-class>ru.otus.l0151.servlets.CacheServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>cacheServlet</servlet-name>
+        <url-pattern>/cache</url-pattern>
+    </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>socketServlet</servlet-name>
         <url-pattern>/websocket</url-pattern>
