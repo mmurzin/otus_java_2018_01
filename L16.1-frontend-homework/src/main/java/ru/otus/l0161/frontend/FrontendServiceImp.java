@@ -3,11 +3,10 @@ package ru.otus.l0161.frontend;
 
 import com.google.gson.Gson;
 import ru.otus.l0161.UserCredentials;
+import ru.otus.l0161.cache.CacheInformation;
 import ru.otus.l0161.channel.ClientMessageWorker;
 import ru.otus.l0161.channel.SocketMessageWorker;
-import ru.otus.l0161.messages.LoginResultMessage;
-import ru.otus.l0161.messages.LoginUserMessage;
-import ru.otus.l0161.messages.Message;
+import ru.otus.l0161.messages.*;
 
 import java.io.IOException;
 import java.util.concurrent.ExecutorService;
@@ -21,6 +20,7 @@ public class FrontendServiceImp implements FrontendService {
     private static final int PAUSE_MS = 5000;
     private static final int MAX_MESSAGES_COUNT = 2;
     private LoginResultDelegate loginResultDelegate;
+    private CacheResultDelegate cacheResultDelegate;
 
     private SocketMessageWorker client;
     private ExecutorService executorService = Executors.newSingleThreadExecutor();
@@ -46,10 +46,15 @@ public class FrontendServiceImp implements FrontendService {
 
     private void handleMessage(Message message) throws IOException {
         logger.log(Level.INFO, "handleMessage " + message.getClass().getSimpleName());
-        logger.log(Level.INFO, "loginResultDelegate " + loginResultDelegate);
         if (message instanceof LoginResultMessage) {
             if (loginResultDelegate != null) {
                 loginResultDelegate.publishResult(((LoginResultMessage) message).isLoginSuccessfully());
+            }
+        }
+
+        if (message instanceof CacheResultMessage){
+            if(cacheResultDelegate != null){
+                cacheResultDelegate.publishCacheInformation(((CacheResultMessage)message).getCacheInformation());
             }
         }
     }
@@ -59,6 +64,12 @@ public class FrontendServiceImp implements FrontendService {
     public void doLogin(UserCredentials credentials, LoginResultDelegate loginResultDelegate) {
         this.loginResultDelegate = loginResultDelegate;
         sendMessage(new LoginUserMessage(credentials));
+    }
+
+    @Override
+    public void getCacheInformation(CacheResultDelegate cacheResultDelegate) {
+        this.cacheResultDelegate = cacheResultDelegate;
+        sendMessage(new CacheMessage());
     }
 
     private synchronized void sendMessage(Message message) {

@@ -1,13 +1,15 @@
 package ru.otus.l0161;
 
+import com.google.gson.Gson;
+import ru.otus.l0161.cache.CacheEngine;
 import ru.otus.l0161.cache.CacheEngineImpl;
+import ru.otus.l0161.cache.CacheInformation;
 import ru.otus.l0161.channel.ClientMessageWorker;
 import ru.otus.l0161.channel.SocketMessageWorker;
 import ru.otus.l0161.db.DBService;
 import ru.otus.l0161.db.DBServiceImpl;
-import ru.otus.l0161.messages.LoginResultMessage;
-import ru.otus.l0161.messages.LoginUserMessage;
-import ru.otus.l0161.messages.Message;
+import ru.otus.l0161.db.ImitationUtils;
+import ru.otus.l0161.messages.*;
 import ru.otus.l0161.server.DBServiceAppMBean;
 
 import java.util.concurrent.ExecutorService;
@@ -21,8 +23,6 @@ import static ru.otus.l0161.App.DEFAULT_PASSWORD;
 public class DBServiceApp implements DBServiceAppMBean {
     private static final String HOST = "localhost";
     private static final int PORT = 5050;
-    private static final int PAUSE_MS = 5000;
-    private static final int CACHE_SIZE = 5000;
     private final Logger logger = Logger.getLogger(DBService.class.getSimpleName());
     private volatile boolean isRunning;
 
@@ -59,6 +59,14 @@ public class DBServiceApp implements DBServiceAppMBean {
             LoginUserMessage loginMessage = (LoginUserMessage)message;
             boolean isValidUserCredentials = dbService.isSuccessfulLogin(loginMessage.getUserCredentials());
             client.send(new LoginResultMessage(isValidUserCredentials));
+        }
+        if(message instanceof CacheMessage){
+            CacheEngine cacheEngine = dbService.getCacheEngine();
+            if(cacheEngine == null){
+                client.send(null);
+            }else {
+                client.send(new CacheResultMessage(cacheEngine.getCacheInformation()));
+            }
         }
     }
 

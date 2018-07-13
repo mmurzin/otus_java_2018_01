@@ -19,7 +19,7 @@ public class App {
     public static final String DEFAULT_PASSWORD = "123456";
 
     private static final Logger logger = Logger.getLogger(App.class.getName());
-    private static final String START_DB_SERVICE_COMMAND = "java -jar ../../L16.1-dbserve-homework/target/dbservice.jar";
+    private static final String START_DB_SERVICE_COMMAND = "java -jar ../L16.1-dbservice-homework/target/dbservice.jar";
     private static final int CLIENT_START_DELAY_SEC = 5;
 
     public static void main(String[] args) throws Exception {
@@ -28,7 +28,7 @@ public class App {
 
     private void startServer() throws Exception {
         ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
-        //startDbService(executorService);
+        startDbService(executorService);
         MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
         ObjectName name = new ObjectName("ru.otus:type=Server");
         SocketServer server = new SocketServer();

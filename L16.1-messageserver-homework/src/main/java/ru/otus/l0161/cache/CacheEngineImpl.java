@@ -115,6 +115,35 @@ public class CacheEngineImpl<K, V> implements CacheEngine<K, V> {
         };
     }
 
+    public static CacheInformation emptyInformation() {
+        return new CacheInformation() {
+            @Override
+            public int getRequestCount() {
+                return -1;
+            }
+
+            @Override
+            public int getHitCount() {
+                return -1;
+            }
+
+            @Override
+            public int getMissCount() {
+                return -1;
+            }
+
+            @Override
+            public int getCacheSize() {
+                return -1;
+            }
+
+            @Override
+            public int getCurrentCount() {
+                return -1;
+            }
+        };
+    }
+
     @Override
     public void dispose() {
         timer.cancel();

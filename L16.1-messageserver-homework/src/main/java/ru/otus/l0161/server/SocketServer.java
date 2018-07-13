@@ -1,10 +1,7 @@
 package ru.otus.l0161.server;
 
 import ru.otus.l0161.channel.SocketMessageWorker;
-import ru.otus.l0161.messages.LoginResultMessage;
-import ru.otus.l0161.messages.LoginUserMessage;
-import ru.otus.l0161.messages.Message;
-import ru.otus.l0161.messages.MessageWorker;
+import ru.otus.l0161.messages.*;
 import sun.rmi.runtime.Log;
 
 import java.net.ServerSocket;
@@ -55,7 +52,9 @@ public class SocketServer implements SocketServerMBean {
                 while(message != null){
                     logger.log(Level.INFO, "Message "+message.getClass().getSimpleName());
                     if(message instanceof LoginUserMessage ||
-                            message instanceof LoginResultMessage){
+                            message instanceof LoginResultMessage ||
+                            message instanceof CacheMessage ||
+                            message instanceof CacheResultMessage){
                         for (MessageWorker messageWorker:workers){
                             messageWorker.send(message);
                         }
