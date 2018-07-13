@@ -3,19 +3,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-    <bean id="messageContext" class="ru.otus.l0151.MessageContext"/>
 
-    <bean id="frontendService" class="ru.otus.l0151.frontend.FrontendServiceImp">
-        <constructor-arg name="context" ref="messageContext"/>
-    </bean>
-
-
-    <bean id="dbService" class="ru.otus.l0151.db.DBServiceImpl">
-        <constructor-arg name="cacheEngine" ref="cacheEngine"/>
-        <constructor-arg name="context" ref="messageContext"/>
-    </bean>
-
-
-    <bean id="cacheEngine" class="ru.otus.l0151.cache.CacheEngineImpl"/>
+    <bean id="frontendService" class="ru.otus.l0161.frontend.FrontendServiceImp"/>
 
 </beans>

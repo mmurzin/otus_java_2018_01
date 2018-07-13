@@ -17,11 +17,13 @@ import ru.otus.l0161.models.UserDataSet;
 import javax.persistence.Table;
 import java.util.List;
 
+import static ru.otus.l0161.App.DEFAULT_LOGIN;
+import static ru.otus.l0161.App.DEFAULT_PASSWORD;
+
 
 public class DBServiceImpl implements DBService {
 
-    public static final String DEFAULT_LOGIN = "admin";
-    public static final String DEFAULT_PASSWORD = "123456";
+
     private SessionFactory sessionFactory;
     private CacheEngine<Long, UserDataSet> cacheEngine;
 

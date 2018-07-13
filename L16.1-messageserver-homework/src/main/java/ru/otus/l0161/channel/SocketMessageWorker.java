@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.UUID;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -32,6 +33,12 @@ public class SocketMessageWorker implements MessageWorker {
     public SocketMessageWorker(Socket socket) {
         this.socket = socket;
         this.executor = Executors.newFixedThreadPool(WORKERS_COUNT);
+    }
+
+
+    @Override
+    public void send(Message message){
+        this.output.add(message);
     }
 
     private static Message getMessageFromJSON(String json) throws ClassNotFoundException, ParseException {
@@ -67,6 +74,7 @@ public class SocketMessageWorker implements MessageWorker {
             while (socket.isConnected()) {
                 Message msg = output.take(); //blocks
                 String json = new Gson().toJson(msg);
+                logger.log(Level.INFO,"sendMessage "+json);
                 out.println(json);
                 out.println();//line with json + an empty line
             }
@@ -83,6 +91,7 @@ public class SocketMessageWorker implements MessageWorker {
                 stringBuilder.append(inputLine);
                 if (inputLine.isEmpty()) {
                     String json = stringBuilder.toString();
+                    logger.log(Level.INFO,"receiveMessage "+json);
                     Message msg = getMessageFromJSON(json);
                     input.add(msg);
                     stringBuilder = new StringBuilder();

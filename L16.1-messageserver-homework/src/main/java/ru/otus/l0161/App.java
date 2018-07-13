@@ -14,8 +14,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class App {
+
+    public static final String DEFAULT_LOGIN = "admin";
+    public static final String DEFAULT_PASSWORD = "123456";
+
     private static final Logger logger = Logger.getLogger(App.class.getName());
-    private static final String START_DB_SERVICE_COMMAND = "java -jar ../L16.1-dbserver-homework/target/L16-dbserver.jar";
+    private static final String START_DB_SERVICE_COMMAND = "java -jar ../../L16.1-dbserve-homework/target/dbservice.jar";
     private static final int CLIENT_START_DELAY_SEC = 5;
 
     public static void main(String[] args) throws Exception {

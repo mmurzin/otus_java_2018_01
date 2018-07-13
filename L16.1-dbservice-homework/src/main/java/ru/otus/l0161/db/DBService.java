@@ -25,4 +25,5 @@ public interface DBService  {
     CacheEngine getCacheEngine();
 
     boolean isSuccessfulLogin(UserCredentials credentials);
+
 }

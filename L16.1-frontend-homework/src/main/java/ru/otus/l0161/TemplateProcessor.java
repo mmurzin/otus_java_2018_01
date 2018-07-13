@@ -1,3 +1,5 @@
+package ru.otus.l0161;
+
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
